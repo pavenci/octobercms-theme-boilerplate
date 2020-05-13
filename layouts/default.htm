@@ -1,0 +1,61 @@
+==
+function onStart() {
+    /**
+    * Получение имени файла frontend-билда
+    */
+
+    // Получение пути к текущей теме
+    use Cms\Classes\Theme;
+    $theme = Theme::getActiveTheme();
+    $themePath = $theme->getPath();
+
+    // Пути ко всем файлам с хэшами
+    $buildHashes = [
+        'themeCss' => file_get_contents($themePath . '/assets/build/theme/css-hash.json'),
+        'themeJs' => file_get_contents($themePath . '/assets/build/theme/js-hash.json'),
+        'componentsCss' => file_get_contents($themePath . '/assets/build/components/css-hash.json'),
+        'componentsJs' => file_get_contents($themePath . '/assets/build/components/js-hash.json')
+    ];
+
+    foreach ($buildHashes as $json => $current) {
+        switch ($json) {
+            case 'themeCss':
+                $jsonDecoded = json_decode($current);
+                $buildName = strval($jsonDecoded -> {'theme.css'});
+                $this['themeCss'] = $buildName;
+                break;
+            case 'themeJs':
+                $jsonDecoded = json_decode($current);
+                $buildName = strval($jsonDecoded -> {'theme.js'});
+                $this['themeJs'] = $buildName;
+                break;
+            case 'componentsCss':
+                $jsonDecoded = json_decode($current);
+                $buildName = strval($jsonDecoded -> {'test/component.css'});
+                $this['componentsCss'] = $buildName;
+                break;
+            case 'componentsJs':
+                $jsonDecoded = json_decode($current);
+                $buildName = strval($jsonDecoded -> {'test/component.js'});
+                $this['componentsJs'] = $buildName;
+                break;
+        }
+    }
+
+}
+==
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ this.page.meta_title }}</title>
+    <meta name="description" content="{{ this.page.meta_description }}">
+    {% partial 'theme/favicon' %}
+    {% partial 'theme/common-styles' %}
+</head>
+<body>
+
+    {% partial 'theme/common-scripts' %}
+</body>
+</html>

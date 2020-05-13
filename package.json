@@ -1,0 +1,26 @@
+{
+  "name": "your-theme",
+  "version": "1.0.0",
+  "description": "theme description",
+  "main": "gulpfile.esm.js",
+  "scripts": {
+    "clean": "gulp clean",
+    "dev": "gulp dev",
+    "watch": "gulp watch",
+    "build": "gulp build"
+  },
+  "author": "Pavel Andreev",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^5.1.0",
+    "esm": "^3.2.25",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-cli": "^2.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rev-all": "^2.0.3",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-terser": "^1.2.0"
+  }
+}
